@@ -4,8 +4,9 @@ import { deleteResource } from '@/app/api/route';
 
 
 export async function deleteResourceForm(formData: FormData) {
-  let id = Number(formData.get('id'));
-  console.log("id " + id);
-  await deleteResource(id);
+  console.log("otro ");
+  //let id = Number(formData.get('ElementId'));
+  //console.log("otro " + id);
+  //await deleteResource(id);
   // revalidatePath('/');
 }

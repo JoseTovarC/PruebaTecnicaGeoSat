@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import {
   TableHead,
@@ -24,10 +24,10 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { deleteResourceForm } from './actions';
+import { DeleteForm } from './delete-form'
+
 
 
 interface Resource {
@@ -36,7 +36,7 @@ interface Resource {
   area: number;
 }
 
-export function ResourcesTable({
+export async function ResourcesTable({
   resources,
   offset,
   totalResources
@@ -45,16 +45,7 @@ export function ResourcesTable({
   offset: number;
   totalResources: number;
 }) {
-  let router = useRouter();
-  let resourcesPerPage = 5;
-
-  function prevPage() {
-    router.back();
-  }
-
-  function nextPage() {
-    router.push(`/?offset=${offset}`, { scroll: false });
-  }
+ 
 
   return (
     <Card>
@@ -97,15 +88,9 @@ export function ResourcesTable({
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem>
-                      <form action={deleteResourceForm}>
-                        <input
-                              type="hidden"
-                              id={"resource_"+resource.id}
-                              name="elementId"
-                              value={resource.id}
-                          />
-                        <button type="submit">Delete</button>
-                      </form>
+                      
+                        <DeleteForm id={resource.id}/>
+
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -118,37 +103,7 @@ export function ResourcesTable({
         </Table>
       </CardContent>
       <CardFooter>
-        <form className="flex items-center w-full justify-between">
-          <div className="text-xs text-muted-foreground">
-            Showing{' '}
-            <strong>
-              {Math.min(offset - resourcesPerPage, totalResources) + 1}-{offset}
-            </strong>{' '}
-            of <strong>{totalResources}</strong> resources
-          </div>
-          <div className="flex">
-            <Button
-              formAction={prevPage}
-              variant="ghost"
-              size="sm"
-              type="submit"
-              disabled={offset === resourcesPerPage}
-            >
-              <ChevronLeft className="mr-2 h-4 w-4" />
-              Prev
-            </Button>
-            <Button
-              formAction={nextPage}
-              variant="ghost"
-              size="sm"
-              type="submit"
-              disabled={offset + resourcesPerPage > totalResources}
-            >
-              Next
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </form>
+        
       </CardFooter>
     </Card>
   );

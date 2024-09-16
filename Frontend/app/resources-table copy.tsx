@@ -1,4 +1,4 @@
-'use client';
+'use server'
 
 import { useState, useEffect } from "react";
 import {
@@ -35,7 +35,7 @@ interface Resource {
   area: number;
 }
 
-export function ResourcesTable() {
+export async function ResourcesTable() {
 
     
     const [resources, setResource] = useState<Resource[] | null>([]);
