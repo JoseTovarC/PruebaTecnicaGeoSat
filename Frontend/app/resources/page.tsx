@@ -2,8 +2,9 @@ import { Tabs, TabsContent } from '@/components/ui/tabs';
 import {PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-import { ResourcesTable } from '../resources-table';
 import { getResources } from '@/app/api/route';
+
+import { ResourcesTable } from '../resources-table';
 
 export default async function ResourcesPage({
   searchParams
@@ -35,9 +36,9 @@ export default async function ResourcesPage({
       </div>
       <TabsContent value="all">
         <ResourcesTable
-          resources={resources}
-          offset={newOffset ?? 0}
-          totalResources={totalResources}
+        resources={resources}
+        offset={10}
+        totalResources = {10}
         />
       </TabsContent>
     </Tabs>

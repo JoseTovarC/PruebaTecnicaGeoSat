@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from "react";
 import {
   TableHead,
   TableRow,
@@ -27,8 +28,6 @@ import {
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { deleteResourceForm } from './actions';
-
 
 interface Resource {
   id: number;
@@ -36,25 +35,45 @@ interface Resource {
   area: number;
 }
 
-export function ResourcesTable({
-  resources,
-  offset,
-  totalResources
-}: {
-  resources: Resource[];
-  offset: number;
-  totalResources: number;
-}) {
-  let router = useRouter();
-  let resourcesPerPage = 5;
+export function ResourcesTable() {
 
-  function prevPage() {
-    router.back();
-  }
+    
+    const [resources, setResource] = useState<Resource[] | null>([]);
 
-  function nextPage() {
-    router.push(`/?offset=${offset}`, { scroll: false });
-  }
+    const getResources = async () => {
+
+      try{
+
+        const response = await fetch('http://localhost:9000/resources',
+          {
+            method:"GET",
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Custom-Header': 'customValue'
+            }
+          }
+        );
+        console.log(response);
+
+        if (response){
+          const { resources } = await response.json();
+          if (resources) setResource(resources);
+        }
+
+      }catch(error){
+        console.log(error);
+      }
+
+
+
+    };
+
+    useEffect(()=>{
+      getResources();
+    }, []);
+ 
+
+
 
   return (
     <Card>
@@ -97,13 +116,7 @@ export function ResourcesTable({
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem>
-                      <form action={deleteResourceForm}>
-                        <input
-                              type="hidden"
-                              id={"resource_"+resource.id}
-                              name="elementId"
-                              value={resource.id}
-                          />
+                      <form action={deleteProduct}>
                         <button type="submit">Delete</button>
                       </form>
                       </DropdownMenuItem>
@@ -118,40 +131,8 @@ export function ResourcesTable({
         </Table>
       </CardContent>
       <CardFooter>
-        <form className="flex items-center w-full justify-between">
-          <div className="text-xs text-muted-foreground">
-            Showing{' '}
-            <strong>
-              {Math.min(offset - resourcesPerPage, totalResources) + 1}-{offset}
-            </strong>{' '}
-            of <strong>{totalResources}</strong> resources
-          </div>
-          <div className="flex">
-            <Button
-              formAction={prevPage}
-              variant="ghost"
-              size="sm"
-              type="submit"
-              disabled={offset === resourcesPerPage}
-            >
-              <ChevronLeft className="mr-2 h-4 w-4" />
-              Prev
-            </Button>
-            <Button
-              formAction={nextPage}
-              variant="ghost"
-              size="sm"
-              type="submit"
-              disabled={offset + resourcesPerPage > totalResources}
-            >
-              Next
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </form>
+        
       </CardFooter>
     </Card>
   );
 }
-
-
