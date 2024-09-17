@@ -43,10 +43,16 @@ La aplicación estará disponible en http://localhost:3000.
 ## Funcionalidades implementadas
 
 - Crear un recurso (formulario).
-- Editar un recurso existente.
 - Eliminar un recurso.
 - Ver la lista de recursos.
 
+## Cosas Pendientes para el siguiente Sprint
+
+- Editar un recurso existente.
+- Crear segmento.
+- Select de segmentos.
+
+
 
 ## Autor
-Desarrollado por: Jose Orlando Tovar
+Desarrollado por: José Orlando Tovar Cano.

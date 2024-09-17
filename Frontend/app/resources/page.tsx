@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { getResources } from '@/app/api/route';
 
 import { ResourcesTable } from '../resources-table';
+import Link from 'next/link';
 
 export default async function ResourcesPage({
   searchParams
@@ -25,13 +26,14 @@ export default async function ResourcesPage({
       <div className="flex items-center">
         
         <div className="ml-auto flex items-center gap-2">
-          
-          <Button size="sm" className="h-8 gap-1">
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Add Resource
-            </span>
-          </Button>
+          <Link href="/resources/create">
+            <Button size="sm" className="h-8 gap-1" >
+              <PlusCircle className="h-3.5 w-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                Add Resource
+              </span>
+            </Button>
+          </Link>
         </div>
       </div>
       <TabsContent value="all">

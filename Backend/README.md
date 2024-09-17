@@ -75,6 +75,12 @@ Este directorio contiene el código del Backend implementado en **Play Framework
 {"nomenclatura":"vereda el triunfo", "longitud":400}
 ```
 
+## Cosas Pendientes para el siguiente Sprint
+
+- Relación de unos a muchos entre segmento y recursos (Llaves foraneas).
+- Corregir nombramiento, hay variables en dos idiomas.
+
+
 
 ## Autor
-Desarrollado por: Jose Orlando Tovar
+Desarrollado por: José Orlando Tovar Cano.

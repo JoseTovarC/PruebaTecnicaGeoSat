@@ -1,9 +1,9 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { deleteInvoice } from '@/app/lib/actions';
+import { deleteResource } from '@/app/lib/actions';
 
-export function DeleteInvoice({ id }: { id: string }) {
+export function DeleteForm({ id }: { id: string }) {
   const handleDelete = async () => {
-    await deleteInvoice(id);  // Aquí llamas a tu acción para eliminar la factura.
+    await deleteResource(id); 
   };
 
 

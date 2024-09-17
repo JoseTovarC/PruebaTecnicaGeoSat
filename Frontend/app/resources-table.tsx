@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { DeleteInvoice } from './delete-form'
+import { DeleteForm } from './delete-form'
 import { useRouter } from 'next/navigation';
 
 
@@ -66,9 +66,9 @@ export function ResourcesTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Resources</CardTitle>
+        <CardTitle>Recursos</CardTitle>
         <CardDescription>
-          Manage your resources and view their sales performance.
+          Gestion de información de Malla vial.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -112,7 +112,7 @@ export function ResourcesTable({
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem>
                       
-                        <DeleteInvoice id={""+resource.id+""}/>
+                        <DeleteForm id={""+resource.id+""}/>
 
                       </DropdownMenuItem>
                     </DropdownMenuContent>
