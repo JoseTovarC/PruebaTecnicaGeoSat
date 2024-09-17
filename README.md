@@ -33,11 +33,11 @@ El proyecto se divide en dos partes principales, incluídas en el presente repos
 
 2. Navegar a la carpeta de **Backend** y seguir la guía de configuración en:
 
-- [Backend README](./backend/README.md)
+- [Backend README](./Backend/README.md)
 
 3. Navegar a la carpeta de **Frontend** y seguir la guía de configuración en:
 
-- [Frontend README](./frontend/README.md)
+- [Frontend README](./Frontend/README.md)
 
 ## Autor
 Desarrollado por: Jose Orlando Tovar

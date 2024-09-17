@@ -23,13 +23,15 @@ Este directorio contiene el código del Frontend implementado en **NextJS** con 
     ```bash
     yarn install
     ```
+    Serian los siguientes comandos:
 
-2. Configuración del API:
-   
-   En el archivo `.env.local`, configura la URL del backend:
-    ```env
-    NEXT_PUBLIC_API_URL=http://localhost:9000
+    ```bash
+    npm install -g pnpm
+    pnpm install
+    pnpm dev
     ```
+
+
 
 1. Ejecución del frontend
     Para correr la aplicación en modo desarrollo:
