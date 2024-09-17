@@ -38,7 +38,7 @@ export default async function ResourcesPage({
         <ResourcesTable
         resources={resources}
         offset={10}
-        totalResources = {10}
+        totalResources = {3}
         />
       </TabsContent>
     </Tabs>

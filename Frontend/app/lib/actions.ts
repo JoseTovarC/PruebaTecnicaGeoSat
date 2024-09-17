@@ -1,12 +1,15 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { deleteResource } from '@/app/api/route';
 
 
-export async function deleteResourceForm(formData: FormData) {
-  console.log("otro ");
-  //let id = Number(formData.get('ElementId'));
+export async function deleteInvoice(id: string) {
   //console.log("otro " + id);
+  await fetch(`http://localhost:9000/resource/delete/${id}`);
   //await deleteResource(id);
-  // revalidatePath('/');
+  revalidatePath('/resources');
 }
+
+
+

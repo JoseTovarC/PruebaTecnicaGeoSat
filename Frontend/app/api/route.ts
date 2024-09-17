@@ -5,7 +5,7 @@ export async function getResources(search: string,
   offset: number) {
   let data = await fetch('http://localhost:9000/resources');//, { next: { revalidate: 1 } })
   let posts = await data.json();
-  revalidatePath('/');
+  revalidatePath('/resources');
   //return Response.json(posts)
   return { resources: posts, newOffset: null, totalResources: posts.count };
 
@@ -20,7 +20,7 @@ export async function deleteResource(id: number) {
     headers: {
         'Content-Type': 'application/json',
     }})
-  revalidatePath('/');
+  revalidatePath('//resources');
   return await response.json();
 
 }

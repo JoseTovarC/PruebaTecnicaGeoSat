@@ -1,4 +1,4 @@
-'use server';
+'use client';
 
 import {
   TableHead,
@@ -26,7 +26,8 @@ import {
 } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { DeleteForm } from './delete-form'
+import { DeleteInvoice } from './delete-form'
+import { useRouter } from 'next/navigation';
 
 
 
@@ -36,7 +37,9 @@ interface Resource {
   area: number;
 }
 
-export async function ResourcesTable({
+
+
+export function ResourcesTable({
   resources,
   offset,
   totalResources
@@ -46,6 +49,16 @@ export async function ResourcesTable({
   totalResources: number;
 }) {
  
+
+  let router = useRouter();
+  let resourcesPerPage = 20;
+  function prevPage() {
+    router.back();
+  }
+  function nextPage() {
+    router.push(`/?offset=${offset}`, { scroll: false });
+  }
+
 
   return (
     <Card>
@@ -89,7 +102,7 @@ export async function ResourcesTable({
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem>
                       
-                        <DeleteForm id={resource.id}/>
+                        <DeleteInvoice id={""+resource.id+""}/>
 
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -103,7 +116,37 @@ export async function ResourcesTable({
         </Table>
       </CardContent>
       <CardFooter>
-        
+        <form className="flex items-center w-full justify-between">
+            <div className="text-xs text-muted-foreground">
+              Showing{' '}
+              <strong>
+                {Math.min(offset - resourcesPerPage, totalResources) + 1}-{offset}
+              </strong>{' '}
+              of <strong>{totalResources}</strong> resources
+            </div>
+            <div className="flex">
+              <Button
+                formAction={prevPage}
+                variant="ghost"
+                size="sm"
+                type="submit"
+                disabled={offset === resourcesPerPage}
+              >
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Prev
+              </Button>
+              <Button
+                formAction={nextPage}
+                variant="ghost"
+                size="sm"
+                type="submit"
+                disabled={offset + resourcesPerPage > totalResources}
+              >
+                Next
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>         
+            </div>
+          </form>
       </CardFooter>
     </Card>
   );
