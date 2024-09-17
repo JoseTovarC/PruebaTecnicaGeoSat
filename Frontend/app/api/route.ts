@@ -20,7 +20,7 @@ export async function deleteResource(id: number) {
     headers: {
         'Content-Type': 'application/json',
     }})
-  revalidatePath('//resources');
+  revalidatePath('/resources');
   return await response.json();
 
 }

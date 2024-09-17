@@ -1,15 +1,55 @@
-# play-java-jpa-example
+####  [<-- Regresar al README Principal](../README.md)
+# Backend - Sistema de Administración de Malla Vial
 
-This project demonstrates how to create a simple database application with Play, using JPA.
+Este directorio contiene el código del Backend implementado en **Play Framework** utilizando **Java**.
 
-Please see the Play documentation for more details:
+## Tecnologías utilizadas
 
-* https://www.playframework.com/documentation/latest/JavaJPA
-* https://www.playframework.com/documentation/latest/ThreadPools
-* https://www.playframework.com/documentation/latest/JavaAsync
+- **Play Framework**: Framework de Java para el desarrollo web.
+- **PostgreSQL**: Base de datos relacional.
+- **CRUD básico**: El backend permite crear, editar, eliminar y listar recursos de la base de datos.
 
-## Server backend
+## Requisitos
 
-By default, the project uses the Pekko HTTP Server backend. To switch to the Netty Server backend, enable the `PlayNettyServer` sbt plugin in the `build.sbt` file.
-In the `build.sbt` of this project, you'll find a commented line for this setting; simply uncomment it to make the switch.
-For more detailed information, refer to the Play Framework [documentation](https://www.playframework.com/documentation/3.0.x/Server).
+- Java 21, se recomienda instalar Temurin, el cual incluye Java 21: https://adoptium.net/es/temurin/releases/
+- PostgreSQL 16: https://www.postgresql.org/download/
+- Scala sbt 1.10.2 o superior: https://www.scala-sbt.org/download/
+- Node.js 20: https://nodejs.org/en/download/prebuilt-installer
+
+## Configuración
+
+### 1. Configuración de la base de datos
+
+1. Instalar PostgreSQL, ejecutarlo y almacenar las credenciales: USERNAME y PASSWORD.
+
+2. Crear una base de datos:
+    ```bash
+    CREATE DATABASE pruebatecnica;
+    ```
+
+3. Configurar las credenciales en el archivo `application.conf`:
+    ```conf
+    db.default.driver=org.postgresql.Driver
+    db.default.url="jdbc:postgresql://localhost:5432/pruebatecnica"
+    db.default.username="USERNAME"
+    db.default.password="PASSWORD"
+    ```
+
+### 2. Ejecución del backend
+
+1. Instalar las dependencias y ejecutar el servidor:
+    ```bash
+    sbt run
+    ```
+
+2. El backend estará disponible en: `http://localhost:9000`.
+
+### 3. Endpoints disponibles
+
+- `POST /recursos`: Crear un recurso.
+- `GET /recursos`: Listar todos los recursos.
+- `PUT /recursos/:id`: Editar un recurso existente.
+- `DELETE /recursos/:id`: Eliminar un recurso.
+
+## Autor
+Desarrollado por: Jose Orlando Tovar
