@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache';
 
 export async function getResources(search: string,
   offset: number) {
-  let data = await fetch('http://localhost:9000/resources');//, { next: { revalidate: 1 } })
+  let data = await fetch('http://localhost:9000/resources', { next: { revalidate: 1 } })
   let posts = await data.json();
   revalidatePath('/resources');
   //return Response.json(posts)

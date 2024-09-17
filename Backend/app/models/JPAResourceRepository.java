@@ -73,8 +73,14 @@ public class JPAResourceRepository implements ResourceRepository {
      private Optional<Resource> modify(EntityManager em, Long id, Resource resource) throws InterruptedException {
         final Resource data = em.find(Resource.class, id);
         if (data != null) {
-            data.kindResource = resource.kindResource;
-            data.area = resource.area;
+            data.tipoMalla = resource.tipoMalla;
+            data.ancho = resource.ancho;
+            data.largo = resource.largo;
+            data.descripcion = resource.descripcion;
+            data.idSegmento = resource.idSegmento;
+
+       
+
         }
         Thread.sleep(10000L);
         return Optional.ofNullable(data);

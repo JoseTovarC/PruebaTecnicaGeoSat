@@ -10,9 +10,36 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    public String kindResource;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_malla", nullable = false)
+    public TipoMalla tipoMalla;
 
-    public int area;
+    @Column(nullable = false)
+    public float ancho;
+
+    @Column(nullable = false)
+    public float largo;
+
+    @Column(nullable = true)
+    public String descripcion;
+
+    @Column(name = "id_segmento", nullable = false)
+    public long idSegmento;
+
+    /*
+    @ManyToOne
+    @JoinColumn(name = "id_segmento", nullable = false)
+    public Segmento segmento;
+    
+    public Segmento getSegmento() {
+        return segmento;
+    }
+
+    public void setSegmento(Segmento segmento) {
+        this.segmento = segmento;
+    }
+    */
+
 
     public Long getId() {
         return id;
@@ -21,20 +48,46 @@ public class Resource {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getKindResource() {
-        return kindResource;
+//kindResource
+    public TipoMalla getTipoMalla() {
+        return tipoMalla;
     }
 
-    public void setKindResource(String kindResource) {
-        this.kindResource = kindResource;
+    public void setTipoMalla(TipoMalla tipoMalla) {
+        this.tipoMalla = tipoMalla;
     }
 
-    public int getArea() {
-        return area;
+    public float getAncho() {
+        return ancho;
     }
 
-    public void setArea(int area) {
-        this.area = area;
+    public void setAncho(float ancho) {
+        this.ancho = ancho;
+    }
+
+    public float getLargo() {
+        return largo;
+    }
+
+    public void setLargo(float largo) {
+        this.largo = largo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public long getIdSegmento() {
+        return idSegmento;
+    }
+
+    public void setIdSegmento(long idSegmento) {
+        this.idSegmento = idSegmento;
     }
 }
+
+

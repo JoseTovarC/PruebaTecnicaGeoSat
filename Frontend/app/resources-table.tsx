@@ -33,8 +33,11 @@ import { useRouter } from 'next/navigation';
 
 interface Resource {
   id: number;
-  kindResource: string;
-  area: number;
+  tipoMalla: string;
+  ancho: number;
+  largo: number;
+  descripcion: string;
+  idSegmento: number;
 }
 
 
@@ -73,8 +76,11 @@ export function ResourcesTable({
           <TableHeader>
             <TableRow>
               
-              <TableHead>Tipo de recurso</TableHead>
-              <TableHead>Area</TableHead>
+              <TableHead>¿Calzada o bordillo?</TableHead>
+              <TableHead>Ancho</TableHead>
+              <TableHead>Largo</TableHead>
+              <TableHead>Descripción</TableHead>
+              <TableHead>Segmento</TableHead>
               
 
               <TableHead>
@@ -87,8 +93,12 @@ export function ResourcesTable({
            
             {resources.map((resource) => (
               <TableRow key={resource.id}>
-              <TableCell>{resource.kindResource}</TableCell>
-              <TableCell>{resource.area}</TableCell>
+              <TableCell>{resource.tipoMalla}</TableCell>
+              <TableCell>{resource.ancho}</TableCell>
+              <TableCell>{resource.largo}</TableCell>
+              <TableCell>{resource.descripcion}</TableCell>
+              <TableCell>{resource.idSegmento}</TableCell>
+
               <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

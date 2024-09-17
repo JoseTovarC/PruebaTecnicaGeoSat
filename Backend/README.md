@@ -3,6 +3,11 @@
 
 Este directorio contiene el código del Backend implementado en **Play Framework** utilizando **Java**.
 
+**NOTA:** Entiéndase como *recurso* los siguientes componentes de una Malla Vial:
+- *Segmento*
+- *Bordillo*
+- *Calzada*
+
 ## Tecnologías utilizadas
 
 - **Play Framework**: Framework de Java para el desarrollo web.
@@ -46,10 +51,30 @@ Este directorio contiene el código del Backend implementado en **Play Framework
 
 ### 3. Endpoints disponibles
 
-- `POST /recursos`: Crear un recurso.
-- `GET /recursos`: Listar todos los recursos.
-- `PUT /recursos/:id`: Editar un recurso existente.
-- `DELETE /recursos/:id`: Eliminar un recurso.
+- `GET     /`: Index
+
+- `POST    /resource/add`: Crear un recurso.
+- `PUT     /resource/edit/:id`: Editar un recurso existente por su id.
+- `GET     /resource/delete/:id`: Eliminar un recurso.
+- `GET     /resource/get/:id`: Obtener un recurso existente por su id.
+- `GET     /resources`: Obtener todos los recursos existentes.
+#### Request de ejemplo para crear y editar un recurso (JSON):
+```json
+{"tipoMalla":"Calzada", "largo":125, "ancho":70, "descripcion":"Placa huella", "idSegmento":1}
+{"tipoMalla": "Bordillo", "ancho": 58.3, "largo": 200.43, "descripcion": "Para cargas pesadas via primaria", "idSegmento": 2}
+```
+
+- `POST    /segmento/add`: Crear un recurso.
+- `PUT     /segmento/edit/:id`: Editar un recurso existente por su id.
+- `GET     /segmento/delete/:id`: Eliminar un recurso.
+- `GET     /segmento/get/:id`: Obtener un recurso existente por su id.
+- `GET     /segmentos`: Obtener todos los recursos existentes.
+#### Request de ejemplo para crear y editar un segmento (JSON):
+```json
+{"nomenclatura":"Santa Elena", "longitud":200.43}
+{"nomenclatura":"vereda el triunfo", "longitud":400}
+```
+
 
 ## Autor
 Desarrollado por: Jose Orlando Tovar

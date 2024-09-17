@@ -28,7 +28,6 @@ Este directorio contiene el código del Frontend implementado en **NextJS** con 
     ```bash
     npm install -g pnpm
     pnpm install
-    pnpm dev
     ```
 
 
@@ -36,7 +35,7 @@ Este directorio contiene el código del Frontend implementado en **NextJS** con 
 1. Ejecución del frontend
     Para correr la aplicación en modo desarrollo:
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
 La aplicación estará disponible en http://localhost:3000.

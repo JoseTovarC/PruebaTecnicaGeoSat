@@ -2,6 +2,8 @@ package controllers;
 
 import models.Resource;
 import models.ResourceRepository;
+import models.Segmento;
+import models.SegmentoRepository;
 import play.libs.concurrent.ClassLoaderExecutionContext;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -30,12 +32,14 @@ public class ResourceController extends Controller {
 
     
     private final ResourceRepository resourceRepository;
+    private final SegmentoRepository segmentoRepository;
     private final ClassLoaderExecutionContext ec;
 
     @Inject
-    public ResourceController(ResourceRepository resourceRepository, ClassLoaderExecutionContext ec) {
+    public ResourceController(ResourceRepository resourceRepository, SegmentoRepository segmentoRepository, ClassLoaderExecutionContext ec) {
         
         this.resourceRepository = resourceRepository;
+        this.segmentoRepository = segmentoRepository;
         this.ec = ec;
     }
 
@@ -45,7 +49,6 @@ public class ResourceController extends Controller {
 
     public CompletionStage<Result> addResource(Http.Request request) {
         
-        
         Optional<Resource> resource = request.body().parseJson(Resource.class);
         return resource.map(p -> resourceRepository.add(p).thenApplyAsync(resourceComple ->
          ok(Json.toJson(resourceComple)), ec.current())
@@ -53,7 +56,6 @@ public class ResourceController extends Controller {
    
 
     }
-
 
     public CompletionStage<Result> updateResource(Http.Request request, String id) {
         
@@ -87,6 +89,60 @@ public class ResourceController extends Controller {
         try {
             resourceRepository.delete(Long.parseLong(id));
             return ok("Resource deleted successfully");
+        } catch (EntityNotFoundException e) {
+            return notFound(e.getMessage());
+        }catch (Exception e) {
+            return badRequest("Id incorrect");
+        }
+    }
+
+//
+//
+//  Apartir de aqui se controla el modelo de segmento
+//
+//
+     public CompletionStage<Result> addSegmento(Http.Request request) {
+        
+        Optional<Segmento> segmento = request.body().parseJson(Segmento.class);
+        return segmento.map(p -> segmentoRepository.add(p).thenApplyAsync(segmentoComple ->
+         ok(Json.toJson(segmentoComple)), ec.current())
+        ).orElse(CompletableFuture.completedFuture(badRequest("Expecting Json data")));
+   
+
+    }
+
+    public CompletionStage<Result> updateSegmento(Http.Request request, String id) {
+        
+        Optional<Segmento> segmento = request.body().parseJson(Segmento.class);
+        return segmento.map(p -> 
+        segmentoRepository.update(Long.parseLong(id), p).thenApplyAsync(optionalSegmento -> 
+        optionalSegmento.map(r -> ok(Json.toJson(r)))
+        .orElse(badRequest("Expecting Json data"))
+         , ec.current())
+
+
+        ).orElse(CompletableFuture.completedFuture(badRequest("Expecting Json data")));
+
+    }
+
+    public CompletionStage<Result> getSegmento(String id) {
+        
+        return segmentoRepository.get(Long.parseLong(id)).thenApplyAsync(optionalSegmento -> 
+        optionalSegmento.map(r -> ok(Json.toJson(r)))
+        .orElse(badRequest("Expecting Json data")), ec.current());
+
+    }
+
+    public CompletionStage<Result> getSegmentos() {
+        return segmentoRepository
+                .list()
+                .thenApplyAsync(segmentoStream -> ok(Json.toJson(segmentoStream.collect(Collectors.toList()))), ec.current());
+    }
+
+    public Result deleteSegmento(String id) {
+        try {
+            segmentoRepository.delete(Long.parseLong(id));
+            return ok("Segmento deleted successfully");
         } catch (EntityNotFoundException e) {
             return notFound(e.getMessage());
         }catch (Exception e) {
